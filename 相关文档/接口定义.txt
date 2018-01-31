@@ -1,0 +1,32 @@
+// 地址查询接口
+// url: xxx
+// method: post
+// 请求字段
+{
+  selectedProvince: '010', // 省份编码
+  selectedCity: '111', // 地市编码
+  detailAddress: 'xxx街道xxx社区', // 详细地址
+  minFlow: '100', // 上月消费最小流量，单位为M
+  maxFlow: '1024' // 上月消费最大流量，单位为M
+}
+// 返回数据示例
+{
+  status: 0,// 返回状态码，为0代表正常，其他取值由后台确定
+  msg: '',// 信息提示，当status不为0的时候，代表出错信息，否则可为空
+  res: [
+    {
+      phonenum: '186xxxx987',
+      province: '北京',
+      city: '海淀区',
+      address: 'xxx社区xxx',
+      flow: '1453M'
+    },
+    {
+      phonenum: '186xxxx987',
+      province: '北京',
+      city: '海淀区',
+      address: 'xxx社区xxx',
+      flow: '1453M'
+    }
+  ] // 正常返回的数据信息
+}

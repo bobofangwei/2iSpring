@@ -1,0 +1,326 @@
+
+//1.登录接口
+//请求方式：post
+//请求地址：xxxx
+//请求数据格式
+{"username":"xxxx","password":"xxxxx"}
+//返回数据格式
+//如果是合法用户，则返回
+{
+  "status":0,
+  "msg":"OK",
+  "res":{
+    "token":"xxxxxx"  //如果该用户名和密码存在，返回用户对应的token，否则token取值为0
+  }
+}
+//如果是非法用户，则返回
+{
+  "status":401,
+  "msg":"账户或密码错误",
+}
+
+//2.用户信息请求接口
+//请求方式：get
+//请求地址：xxxx
+//返回数据格式
+{
+  "status":0,
+  "msg":"OK",
+  "res":{
+    "username":"",//用户名
+    "avatar":"",//用户头像地址
+    "roles":[] //用户权限数组（一个用户可能有多种权限）
+  }
+}
+
+//3.用户注销接口
+//请求方式：post
+//请求地址：xxxx
+//请求数据格式
+{"token":"xxxxxx"}
+//返回数据格式
+{
+  "status":0,
+  "msg":"OK"
+}
+
+
+/******产品日报表页面******/
+
+//1. 根据地域请求报表信息
+// 请求方式:post
+// 请求地址：xxxxx
+// 请求数据格式
+{"selectedProvince": "13", "selectedDate": "2017-8-17 00:00:00"}//selectedProvince为对应省分编码
+//返回数据格式：
+//{
+  "status":0,//接口状态字段
+  "msg":"",//出错信息字段，（接口返回有误时有值）
+  "res":[{
+    'product_id: '1',//产品对应编码
+    'product_name': '大王卡', //产品名称
+    'yes_add': 110,//当日新增
+    'mon_add': 111111,//当月新增
+    'yes_tingji': 105,//当日停机
+    'yes_qianfei': 101,//当日欠费
+    'yes_xiaohu': 1000,//当日销户
+    'yes_shouchong': 101,//当日首充
+    'sum_user': 111111 //用户总数
+      }]
+}
+
+/******区域日报表页面******/
+
+//1. 根据产品类型请求报表信息
+// 请求方式:post
+// 请求地址：xxxxx
+// 请求数据格式
+{"selectedProduct": "90065148", "selectedDate": "2017-8-16 00:00:00"}//selectedProduct为对应产品编码
+//返回数据格式：
+{
+  "status":0,
+  "msg":"",
+  "res":[{
+    'province_code': '1',//省份对应编码
+    'province_name': '河南',//省份名称
+    'yes_add': 110,//当日新增
+    'mon_add': 111111,//当月新增
+    'yes_tingji': 105,//当日停机
+    'yes_qianfei': 101,//当日欠费
+    'yes_xiaohu': 1000,//当日销户
+    'yes_shouchong': 101,//当日首充
+    'sum_user': 111111 //用户总数
+      }]
+}
+
+/******产品月报表页面******/
+
+//1. 根据地域请求报表信息
+// 请求方式:post
+// 请求地址：xxxxx
+// 请求数据格式
+{"selectedProvince": "13", "selectedDate": "2017-8-17 00:00:00"}//selectedProvince为对应省分编码
+//返回数据格式：
+//{
+  "status":0,//接口状态字段
+  "msg":"",//出错信息字段，（接口返回有误时有值）
+  "res":[{
+    'product_id: '1',//产品对应编码
+    'product_name': '大王卡', //产品名称
+    'last_mon_add': 110,//上月新增
+    'mon_add': 111111,//当月新增
+    'mon_tingji': 105,//当月停机
+    'mon_qianfei': 101,//当月欠费
+    'mon_xiaohu': 1000,//当月销户
+    'mon_shouchong': 101,//当月首充
+    'sum_user': 111111 //用户总数
+      }]
+}
+
+/******区域月页面******/
+
+//1. 根据产品类型请求报表信息
+// 请求方式:post
+// 请求地址：xxxxx
+// 请求数据格式
+{"selectedProduct": "90065148", "selectedDate": "2017-8-16 00:00:00"}//selectedProduct为对应产品编码
+//返回数据格式：
+{
+  "status":0,
+  "msg":"",
+  "res":[{
+    'province_code': '1',//省份对应编码
+    'province_name': '河南',//省份名称
+    'last_mon_add': 110,//上月新增
+    'mon_add': 111111,//当月新增
+    'mon_tingji': 105,//当月停机
+    'mon_qianfei': 101,//当月欠费
+    'mon_xiaohu': 1000,//当月销户
+    'mon_shouchong': 101,//当月首充
+    'sum_user': 111111 //用户总数
+      }]
+}
+
+/****基本信息页面****/
+
+//1. 查询接口
+//请求方式post(待定)
+//请求地址：xxxxx
+//请求数据格式：
+{
+  "sex": 1,//为""代表未选择，0代表男性，1代表女性
+  "minAge": 0,//最小年龄，如果为0代表未选择
+  "maxAge": 100,//最大年龄，如果为100代表未选择
+  "provinces": ["1"],//查询的归属地编码数组
+  "products": ["0", "1"],//查询的产品编码数组
+  "states": ["1", "0"],//查询的状态编码数组，0为，1为，2为
+  "minBalance": -9999,//最小余额，如果是-9999代表未选择此项
+  "maxBalance": 10000,//最大余额，如果是10000代表未选择此项
+  "daterange": ["2017-08-15T16:00:00.000Z", "2017-09-06T16:00:00.000Z"],//入网时间范围
+  "recharge": [0, 1] //充值情况，0代表首充，1代表次充
+}
+//返回数据格式：
+{
+  "status":0,
+  "msg":"",
+  "products": [
+    {
+      "serial_number": "xxxxx",
+      "cust_name": "xxxx",
+      "contact_phone": "xxxx",
+      "sex": "xxxx",
+      "age": "xxxx",
+      "province_name": "xxxx",
+      "open_account_time": "xxxx",
+      "product_name": "xxxx",
+      "product_id": "xxxx",
+      "fee": "xxxx",
+      "state_name": "xxxx",
+      "leave_real_fee": "xxxx",
+      "leave_fee_time": "xxxx",
+      "credit_fee": "xxxx",
+      "pay_first_tag": "xxxx",
+      "pay_first_time": "xxxx",
+      "pay_first_fee": "xxxx",
+      "pay_second_tag": "xxxx",
+      "pay_second_time": "xxxx",
+      "pay_second_fee": "xxxx",
+      "update_time": "xxxx"
+    }
+
+  ],
+  "fileUrl": "xxxxx"
+}
+
+/**可视化页面接口***/
+
+//1. 查询接口
+{
+  "selectedProduct": "90065148"
+}
+//返回数据格式：
+{
+    "status":0,
+  "msg":"",
+  "res": {
+    "age": {
+      '00': 111, // 00后
+      '90': 233, // 90后
+      '80': 111, // 80后
+      '70': 444, // 70后
+      '60': 322, // 60后
+      'gt60': 111 // 大于57岁
+    },
+    "province": {
+      '31': 123232,
+      '23': 1111
+    },
+    "sex": {
+      'male': 53
+      'female': 47
+    },
+    "userAdd": [
+    {'9-15日': 111},
+    {'2017年9月14日': 111}
+    ],
+    "userAll":  [
+    {'2017年9月15日': 111},
+  {'2017年9月14日': 111}
+    ],
+    "userMinus":  [
+    {'2017年9月15日': 111},
+    {'2017年9月14日': 111}
+    ]
+  }
+}
+
+
+/********************账户相关接口*************************/
+1.验证码获取（暂不考虑吧）
+2.密码重置接口（供忘记密码时找回）
+// 可以暂不考虑此功能
+{
+  "username":"Liwb122",//用户云门户账号
+  "sendType":"email",// 重置密码发送类型：目前默认邮箱，后续可能考虑手机等
+  "verifyCode":"756295"// 验证码，目前的验证码是前台随机生成的，理论上应从后台获取，如果由前台生成，后台可以暂不考虑验证此字段
+}
+3.密码修改接口
+// 方式： post
+// 请求数据：
+{
+  initPassword: "e10adc3949ba59abbe56e057f20f883e", // 用户原密码
+  newPassword: "e10adc3949ba59abbe56e057f20f883e", // 新密码
+  passwordAgain: "e10adc3949ba59abbe56e057f20f883e" //新密码重复
+}
+备注：用户身份请从请求头的token中获取
+// 返回数据格式
+{
+  "status":0, // 修改成功为0，如果失败后台自行约定其他状态码
+  "msg":"" // 修改成功为OK，或者1.原密码输入错误；2.两次输入的新密码不一致；3.抱歉，您不是系统合法用户
+}
+4.新增用户接口
+//方式post
+//传递数据格式
+{
+  "username":"liwb122",
+  "name":"李伟博",
+  "company":"联通总部",
+  "apartment":"电子商务部",
+  "role":"admin",
+  "roleName":"管理员"
+}
+// 返回数据格式
+{
+  "status":0, // 修改成功为0，如果失败后台自行约定其他状态码
+  "msg":"" // 修改成功为OK，或者1.该用户名非云门户合法账号；
+}
+5.用户信息修改接口
+//方式post
+//传递数据格式
+{
+  "username":"liwb122",
+  "name":"李伟博",
+  "company":"联通总部",
+  "apartment":"电子商务部",
+  "role":"admin",
+  "roleName":"管理员"
+}
+// 返回数据格式
+{
+  "status":0, // 成功为0，如果失败后台自行约定其他状态码
+  "msg":"" // 成功为OK，或者其他错误提示
+}
+5.删除用户接口
+// 方式post,支持批量删除
+// 传递数据格式
+["liwb122","bobo"]
+// 返回数据格式
+{
+  "status":0, // 成功为0，如果失败后台自行约定其他状态码
+  "msg":"" // 成功为OK，或者其他错误提示
+}
+6.系统用户查询接口
+// 方式get
+//返回数据格式
+{
+  "status":0, // 成功为0，如果失败后台自行约定其他状态码
+  "msg":"" // 成功为OK，或者其他错误提示
+  "res":[
+  {
+    "username":"liwb122",
+    "name":"李伟博",
+    "company":"联通总部",
+    "apartment":"电子商务部",
+    "role":"admin",
+    "roleName":"管理员"
+  },
+  {
+    "username":"liwb122",
+    "name":"李伟博",
+    "company":"联通总部",
+    "apartment":"电子商务部",
+    "role":"admin",
+    "roleName":"管理员"
+  }
+  ]
+}

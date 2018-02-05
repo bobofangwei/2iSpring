@@ -10,9 +10,6 @@ import '@/common/scss/index.scss'
 import store from './store/index.js';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
-import {
-  getToken
-} from '@/util/auth.js';
 
 Vue.config.productionTip = false
 Vue.use(ElementUi);
@@ -20,8 +17,8 @@ const whiteList = ['/login'];
 router.beforeEach((to, from, next) => {
   NProgress.start();
   // 使用token来判断用户是否登录
-  if (getToken()) {
-    // 如果cookie中记录有用户登录信息，那么可以免登录，直接访问根路径
+  if (store.getters.token) {
+    // 如果有用户登录信息，那么可以免登录，直接访问根路径
     if (to.path === '/login') {
       next({
         path: '/'
